@@ -1,0 +1,9 @@
+{
+    "connectVIS" : "vcenter.joseph.local",
+    "VMHost" : "192.168.3.21",
+    "folder" : "BASE-VMS",
+    "dstore" : "datastore2-super11"
+
+
+
+}

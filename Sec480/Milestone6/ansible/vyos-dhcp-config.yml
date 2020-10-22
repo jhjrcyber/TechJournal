@@ -1,0 +1,10 @@
+- name: vyos
+  hosts: vyos
+  tasks:
+    - name: load from jinja template
+      template:
+        src: /home/xub/ansible/vyos/dhcp-config.sh.j2
+        dest: /tmp/config.sh
+        mode: u+rwx
+    - name: run the script
+      shell: nohup /tmp/config.sh &>/tmp/out.txt &
