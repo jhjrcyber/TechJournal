@@ -1,0 +1,28 @@
+- name: push key    
+  hosts: linux_server
+  tasks:
+    - name: create the .ssh directory if it is not there
+      file:
+        path: /home/deployer/.ssh
+        state: directory
+        mode: 0700
+    - name: create authorized_key file
+        file: 
+            path: /home/deployer/.ssh/authorized_keys
+            state: touch
+            mode: 0644
+    - name: copy over key block and append to authorized_keys
+      blockinfile:
+            dest: /home/deployer/.ssh/authorized_keys
+            block: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDga7NmfA/Fm9RIpnp2wVVzjx5M2BzEKvNDA6yGaNNVi4EypEfjuYhgsUmuYAkIR4QY5Vwjs4OOyWBEeo26rjXtkxUwb6/1zyDGbzq+I/Z9ogytG6vXisKRx4SkzaM86FFah5PGi6OAmaG+kMFf2BrClxfzB3YWHTUlFbsL/E+rpMBEss7/3nB4sNzh+8SlX7oVchWE0z68Okgnlis+94RGx65dgUgqCUZfycvA6SXO4+F+S1eIGufMHzCv5kriAK6x5DtPoCUqyQb28W+lOILvIilM3/M/+G8ySYxPW1x4luWfd4xbVMyUraj1QtW09OguS9BS+d7fnJMFbZBpvWyqJbMP9W+1X5OqMod1XQBP7XVHaWybOIoXtnYCDkEzIwJoCgasTNvE/nK3U9gWp5iaSc8Fn/a2Domnv1hiJb6ZFbLNr7oiAvCLNddVCzmpwUvGtWsfx7vEHwLN9yIirREfXx1afiELPV6VyBPLexy0aWpNuXKFhiYNnZd4rO5j2J0= xub@ubuntu
+    - name: create sudoers dropin file for 480
+      file:
+        path: /etc/sudoers.d/480
+        state: touch
+        mode: 0440
+      become: yes
+    - name: create xub entry in /etc/sudoers.d/480
+      blockinfile:
+        dest: /etc/sudoers.d/480
+        block: "xub ALL=(ALL) NOPASSWD: ALL"
+      become: yes
