@@ -1,0 +1,6 @@
+[aws]
+ec2-3-238-229-134.compute-1.amazonaws.com hostname=ip-172-31-67-216
+
+[aws:vars]
+ansible_user=ubuntu
+ansible_ssh_private_key_file=/home/xub/Desktop/aws_keys/aws-deployer
