@@ -1,0 +1,15 @@
+- name: docker install
+  hosts: all
+  become: yes
+  tasks:
+    - name: Run docker install script
+      script: /home/champuser/Desktop/docker.sh
+
+    - name: Run docker-compose script
+      script: /home/champuser/Desktop/compose.sh
+
+    - name: add the user "ubuntu" to docker group
+      user:
+        name: ubuntu
+        groups: docker
+        append: yes 
